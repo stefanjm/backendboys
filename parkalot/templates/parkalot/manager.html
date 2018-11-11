@@ -17,8 +17,8 @@ tr:nth-child(even) {
 }
 </style>
 <!-- Display ongoing parkings -->
+<h2>ONGOING PARKING</h2>
 {% if ongoing_parkings %}
-    <h2>ONGOING PARKING</h2>
     <hr>
     <table style="width: 20%">
         <tr>
@@ -28,11 +28,33 @@ tr:nth-child(even) {
         {% for parking in ongoing_parkings %}
             <tr>
                 <td><a href="{% url 'customer' parking.customer.id %}"">{{ parking.customer.carRegistrationNumber }}</a></td>
-                <td>{{ parking.customer.carRegistrationNumber }}</td>
                 <td>{{ parking.startDate }}</td> 
             </tr>
         {% endfor %}
     </table>
 {% else %}
     <p>No ongoing parkings.</p>
+{% endif %}
+
+<h2>FINISHED PARKINGS</h2>
+{% if finished_parkings %}
+    <hr>
+    <table style="width: 20%">
+        <tr>
+            <th>Customer Car Reg. Plate</th>
+            <th>Parking Start Date</th> 
+            <th>Parking Finished Date</th>
+            <th>Parking Length</th>
+        </tr>
+        {% for parking in finished_parkings %}
+            <tr>
+                <td><a href="{% url 'customer' parking.customer.id %}"">{{ parking.customer.carRegistrationNumber }}</a></td>
+                <td>{{ parking.startDate }}</td> 
+                <td>{{ parking.endDate }}</td> 
+                <td>{{ parking.get_parking_length }}</td> 
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No finished parkings yet.</p>
 {% endif %}
