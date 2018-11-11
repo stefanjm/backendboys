@@ -1,0 +1,38 @@
+<!-- Quick and dirty style, should add it as a static .css -->
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+<!-- Display ongoing parkings -->
+{% if ongoing_parkings %}
+    <h2>ONGOING PARKING</h2>
+    <hr>
+    <table style="width: 20%">
+        <tr>
+            <th>Customer Car Reg. Plate</th>
+            <th>Parking Start Date</th> 
+        </tr>
+        {% for parking in ongoing_parkings %}
+            <tr>
+                <td><a href="{% url 'customer' parking.customer.id %}"">{{ parking.customer.carRegistrationNumber }}</a></td>
+                <td>{{ parking.customer.carRegistrationNumber }}</td>
+                <td>{{ parking.startDate }}</td> 
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No ongoing parkings.</p>
+{% endif %}
