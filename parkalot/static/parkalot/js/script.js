@@ -16,12 +16,14 @@ $(document).ready(function() {
   });
 
   setInterval(() => {
-    getCurrentTime($("#current-time"))
+    getCurrentTime($("#current-time>span"))
   }, 1000)
 });
 
 // This function just gets the current time, formats it and puts the formatted text into element
 function getCurrentTime(element) {
+  if (element.attr("class") == "not-used")
+    element.removeClass("not-used")
   let time = new Date()
   let timeValue = "";
 
@@ -55,7 +57,7 @@ function submitIfHaveCoordinates(lat,long) {
   })
 
   // This puts the timer on, showing the customer when his free time on this parking zone is over
-  calculateParkEndTime($("#park-end-time"))
+  calculateParkEndTime($("#park-end-time>span"))
 
   //get current time and set the second clock for 3 hours later
   // document.getElementById("startParkForm").submit();
@@ -63,6 +65,8 @@ function submitIfHaveCoordinates(lat,long) {
 }
 
 function calculateParkEndTime(element) {
+  if (element.attr("class") == "not-used")
+    element.removeClass("not-used")
   let time = new Date()
   let parkEndTime = ""
 
