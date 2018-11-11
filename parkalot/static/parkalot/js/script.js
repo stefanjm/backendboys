@@ -20,6 +20,7 @@ $(document).ready(function() {
   }, 1000)
 });
 
+// This function just gets the current time, formats it and puts the formatted text into element
 function getCurrentTime(element) {
   let time = new Date()
   let timeValue = "";
@@ -43,6 +44,7 @@ function submitIfHaveCoordinates(lat,long) {
     $('input[name="coordinates"]').val(lat+":"+long);
     let formEl = $("#startParkForm")
 
+    // Make an ajax requests, so that we keep the same page and show the digital clock
     $.ajax({
       url:formEl.attr('action'),
       type: 'post',
@@ -52,7 +54,24 @@ function submitIfHaveCoordinates(lat,long) {
       }
   })
 
+  // This puts the timer on, showing the customer when his free time on this parking zone is over
+  calculateParkEndTime($("#park-end-time"))
+
   //get current time and set the second clock for 3 hours later
-    // document.getElementById("startParkForm").submit();
+  // document.getElementById("startParkForm").submit();
   }
+}
+
+function calculateParkEndTime(element) {
+  let time = new Date()
+  let parkEndTime = ""
+
+  if (time.getHours() + 3 < 10)
+    parkEndTime += "0"
+  parkEndTime += (time.getHours() + 3) + ":"
+  if (time.getMinutes() + 1 < 10)
+    parkEndTime += "0"
+  parkEndTime += (time.getMinutes() + 1)
+
+  element.text(parkEndTime)
 }
