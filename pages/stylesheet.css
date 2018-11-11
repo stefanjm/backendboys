@@ -1,0 +1,111 @@
+header {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 200%;
+    font-variant: small-caps;
+    text-align: center;
+}
+
+nav {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 150%;
+    font-variant: small-caps;
+    text-align: center;
+    margin-left: -10px;
+    padding: 5px 0px 5px 0px;
+    background-color: dodgerblue;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    padding: 0px 50px 0px 50px;
+}
+
+nav a:hover {
+    background-color: white;
+    color: dodgerblue;
+    transition: .5s;
+}
+
+h1 {
+    left: 195px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+section {
+    left: 195px;
+}
+
+ul {
+    left: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 110%;
+    list-style-type: none;
+    margin-top: 5px;
+    padding: 0;
+    width: 15%;
+    color: white;
+    background-color: dodgerblue;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+}
+
+ul h3 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-variant: small-caps;
+    padding-left: 10px;
+}
+
+ul a {
+    display: block;
+    text-align: left;
+    color: white;
+    text-decoration: none;
+    padding-right: 20px;
+}
+
+ul a:hover {
+    
+    background-color: white;
+    color: dodgerblue;
+    padding-left: 20px;
+    transition: .5s;
+}
+
+section h1 {
+    font-size: 400%;
+}
+
+section .parking-spots {
+    bottom: 0;
+    position: fixed;
+    left: 15%;
+    height: 60px;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 110%;
+    font-variant: small-caps;
+    text-align: left;
+    vertical-align: middle;
+    color: white;
+    background-color: dodgerblue;
+    outline-width: 6px;
+    outline-color: dodgerblue;
+    margin-left: 5px;
+    padding: 5px 0px 0px 5px;
+}
+
+section .parking-spots p {
+    display: none;
+}
+
+section .parking-spots:hover {
+    height: 120px;
+    transition: .5s;
+}
+
+section .parking-spots:hover p {
+    display: block;
+}
