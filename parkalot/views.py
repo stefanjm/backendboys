@@ -53,7 +53,7 @@ def customer(request, customer_id):
 
                 # GOOGLE MAPS API GEOLOCATION ----------
                 base = "https://maps.googleapis.com/maps/api/geocode/json?"
-                key = "AIzaSyCgNTrI88jks6hB6UFHVY6kg1hjgYVcM-k"
+                key = "api_key_here"
 
                 # get the coordinates from POST, then split into longitude and latitude
                 lat = form.cleaned_data['coordinates'].split(":")[0]
