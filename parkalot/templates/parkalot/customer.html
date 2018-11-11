@@ -5,12 +5,13 @@
 
 <h2>Start parking Today!</h2>
 
-<!-- User starts parking and send his id, coordinates -->
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="{% url 'customer' customer_id %}" method="post" id="startParkForm">
-    {% csrf_token %}
-    <input hidden type="text" name="customerId" id="customerId" value="{{ customer_id }}">
-    <input hidden type="text" name="coordinates" id="coordinates" value="">
-    <input type="submit" value="startPark">
-</form>
+<div class="digital-clock">
+    <form action="{% url 'customer' customer_id %}" method="post" id="startParkForm">
+        {% csrf_token %}
+        <input hidden type="text" name="customerId" id="customerId" value="{{ customer_id }}">
+        <input hidden type="text" name="coordinates" id="coordinates" value="">
+        <input type="submit" value="Start clock">
+    </form>
+    <div class="clock" id="current-time"></div>
+    <div class="clock" id="park-end-time"></div>
+</div>
