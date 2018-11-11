@@ -1,3 +1,7 @@
+# For google API
+import urllib.request
+import json
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -30,7 +34,9 @@ def customer(request, customer_id):
         # check if form is valid
         if form.is_valid():
             #TODO add customer and it's coordinates to DB, then ask for address from google maps API
-            # Check if customer  is stopping or starting parking
+            # Check if customer is stopping or starting parking
+
+            # if customer is already parking somewhere
             any_ongoing_parkings = customer_parkings.exclude(endDate__isnull=False)
             if(any_ongoing_parkings):
                 # Found row with endDate not specified, means customer is already parking
@@ -43,6 +49,24 @@ def customer(request, customer_id):
                 # startDate automatically uses datetime.now() so we don't need to specify it 
                 newParking = Parking(customer = Customer.objects.get(pk=customer_id))
                 newParking.save()
+
+                # GOOGLE MAPS API GEOLOCATION ----------
+                base = "https://maps.googleapis.com/maps/api/geocode/json?"
+                key = "AIzaSyCgNTrI88jks6hB6UFHVY6kg1hjgYVcM-k"
+
+                # get the coordinates from POST, then split into longitude and latitude
+                lat = form.cleaned_data['coordinates'].split(":")[0]
+                lng = form.cleaned_data['coordinates'].split(":")[1]
+
+                def parkingStart(lat, lng):
+                    url = base + "latlng={},{}&key={}".format(lat, lng, key)
+                    return urllib.request.urlopen(url).read()
+
+                r = parkingStart(lat, lng)
+                data = json.loads(r.text)
+
+                address = data['results'][0]['formatted_address']
+                # GOOGLE MAPS API GEOLOCATION ----------
     # if not post
     else: 
         # Check for ongoing customer parking

@@ -49,8 +49,8 @@ function submitIfHaveCoordinates(lat,long) {
       url:formEl.attr('action'),
       type: 'post',
       data: formEl.serialize(),
-      succsess: () => {
-          console.log("successfully sent data to server")
+      success : function(data) {
+          // if successful, display the address
       }
   })
 
