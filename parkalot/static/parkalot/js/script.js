@@ -54,11 +54,7 @@ function submitIfHaveCoordinates(lat,long) {
       data: formEl.serialize(), 
       success: function(databack) {
           // if successful, display the address
-          alert(JSON.stringify(databack.address));
           $("#customer-parking-address").append("<P>"+databack.address);
-      },
-      error: function(e){
-        alert(JSON.stringify(e));
       }
   })
 
