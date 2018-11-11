@@ -83,7 +83,7 @@ section .parking-spots {
     position: fixed;
     left: 15%;
     height: 60px;
-    width: 100%;
+    width: 84%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 110%;
     font-variant: small-caps;
