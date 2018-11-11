@@ -1,17 +1,18 @@
 <!-- jquery for getting user position coordinates and sending with the form -->
 {% load static %}
+<link rel="stylesheet" href="{% static 'parkalot/css/styles.css' %}">
 <script src="{% static 'parkalot/js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'parkalot/js/script.js' %}"></script>
 
-<h2>Start parking Today!</h2>
-
-<div class="digital-clock">
+<div id="digital-clock-border">
     <form action="{% url 'customer' customer_id %}" method="post" id="startParkForm">
         {% csrf_token %}
         <input hidden type="text" name="customerId" id="customerId" value="{{ customer_id }}">
         <input hidden type="text" name="coordinates" id="coordinates" value="">
         <input type="submit" value="Start clock">
     </form>
-    <div class="clock" id="current-time"></div>
-    <div class="clock" id="park-end-time"></div>
+    <div id="digital-clock">
+        <div class="clock" id="current-time"><span class="not-used">00:00:00</span></div>
+        <div class="clock" id="park-end-time"><span class="not-used">00:00</span></div>
+    </div>
 </div>
