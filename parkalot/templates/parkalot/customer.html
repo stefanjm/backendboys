@@ -1,18 +1,36 @@
-<!-- jquery for getting user position coordinates and sending with the form -->
+<!-- jquery for getting customer position coordinates and sending with the form -->
 {% load static %}
 <link rel="stylesheet" href="{% static 'parkalot/css/styles.css' %}">
 <script src="{% static 'parkalot/js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'parkalot/js/script.js' %}"></script>
 
 <div id="digital-clock-border">
-    <form action="{% url 'customer' customer_id %}" method="post" id="startParkForm">
-        {% csrf_token %}
-        <input hidden type="text" name="customerId" id="customerId" value="{{ customer_id }}">
-        <input hidden type="text" name="coordinates" id="coordinates" value="">
-        <input type="submit" value="Start clock">
-    </form>
-    <div id="digital-clock">
-        <div class="clock" id="current-time"><span class="not-used">00:00:00</span></div>
-        <div class="clock" id="park-end-time"><span class="not-used">00:00</span></div>
+    {% if already_parking %}
+    <!-- customer is parking already, display timer and make it possible to stop parking -->
+        <form action="{% url 'customer' customer_id %}" method="post" id="startParkForm">
+            {% csrf_token %}
+            <input hidden type="text" name="customerId" id="customerId" value="{{ customer_id }}">
+            <input hidden type="text" name="coordinates" id="coordinates" value="">
+            <input type="submit" value="End Parking">
+        </form>
+        <div id="digital-clock">
+            <div class="clock" id="current-time"><span class="not-used">00:00:00</span></div>
+            <div class="clock" id="park-end-time"><span class="not-used">00:00</span></div>
+        </div>
+    {% else %}
+    <!-- customer is NOT parking already, start parking and display time -->
+        <form action="{% url 'customer' customer_id %}" method="post" id="startParkForm">
+            {% csrf_token %}
+            <input hidden type="text" name="customerId" id="customerId" value="{{ customer_id }}">
+            <input hidden type="text" name="coordinates" id="coordinates" value="">
+            <input type="submit" value="Start Parking">
+        </form>
+        <div id="digital-clock">
+            <div class="clock" id="current-time"><span class="not-used">00:00:00</span></div>
+            <div class="clock" id="park-end-time"><span class="not-used">00:00</span></div>
+        </div>
+    {% endif %}
+    <div id="customer-parking-address">
+        <p></p>
     </div>
 </div>

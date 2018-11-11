@@ -41,7 +41,7 @@ def customer(request, customer_id):
             if(any_ongoing_parkings):
                 # Found row with endDate not specified, means customer is already parking
                 # so we stop parking
-                ongoing_parking = any_ongoing_parkings
+                ongoing_parking = any_ongoing_parkings.first()
                 ongoing_parking.endDate = datetime.now()
                 ongoing_parking.save()
             # If no parkings without endDate specified are found, means customer wants to start parking, so we do that
@@ -65,7 +65,9 @@ def customer(request, customer_id):
                 r = parkingStart(lat, lng)
                 data = json.loads(r.text)
 
-                address = data['results'][0]['formatted_address']
+                json_data = json.dumps({"address": data['results'][0]['formatted_address']})
+                # send address back to ajax call to display
+                return HttpResponse(json_data, content_type='application/json')
                 # GOOGLE MAPS API GEOLOCATION ----------
     # if not post
     else: 
