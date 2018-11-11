@@ -1,6 +1,7 @@
 # For google API
 import urllib.request
 import json
+import requests
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -60,12 +61,12 @@ def customer(request, customer_id):
 
                 def parkingStart(lat, lng):
                     url = base + "latlng={},{}&key={}".format(lat, lng, key)
-                    return urllib.request.urlopen(url).read()
+                    return requests.get(url)
 
                 r = parkingStart(lat, lng)
                 data = json.loads(r.text)
 
-                json_data = json.dumps({"address": data['results'][0]['formatted_address']})
+                json_data = json.dumps({'address':data['results'][0]['formatted_address']})
                 # send address back to ajax call to display
                 return HttpResponse(json_data, content_type='application/json')
                 # GOOGLE MAPS API GEOLOCATION ----------
