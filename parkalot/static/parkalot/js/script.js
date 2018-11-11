@@ -50,9 +50,15 @@ function submitIfHaveCoordinates(lat,long) {
     $.ajax({
       url:formEl.attr('action'),
       type: 'post',
-      data: formEl.serialize(),
-      success : function(data) {
+      dataType: "json",
+      data: formEl.serialize(), 
+      success: function(databack) {
           // if successful, display the address
+          alert(JSON.stringify(databack.address));
+          $("#customer-parking-address").append("<P>"+databack.address);
+      },
+      error: function(e){
+        alert(JSON.stringify(e));
       }
   })
 
